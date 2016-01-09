@@ -41,10 +41,12 @@
             "Value": {
                 "Fn::Join": [
                     "",
-                    "AWS_ACCESS_KEY_ID=",
-                    {
-                        "Ref": "AccessKey"
-                    }
+                    [
+                        "AWS_ACCESS_KEY_ID=",
+                        {
+                            "Ref": "AccessKey"
+                        }
+                    ]
                 ]
             }
         },
@@ -52,13 +54,15 @@
             "Value": {
                 "Fn::Join": [
                     "",
-                    "AWS_SECRET_ACCESS_KEY=",
-                    {
-                        "Fn::GetAtt": [
-                            "AccessKey",
-                            "SecretAccessKey"
-                        ]
-                    }
+                    [
+                        "AWS_SECRET_ACCESS_KEY=",
+                        {
+                            "Fn::GetAtt": [
+                                "AccessKey",
+                                "SecretAccessKey"
+                            ]
+                        }
+                    ]
                 ]
             }
         }

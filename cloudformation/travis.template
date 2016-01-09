@@ -1,0 +1,66 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "ec2mnt travis user",
+    "Resources": {
+        "User": {
+            "Type": "AWS::IAM::User",
+            "Properties": {
+                "Path": "/service/",
+                "Policies": [
+                    {
+                        "PolicyName": "publish",
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Action": [
+                                        "s3:PutObject",
+                                        "s3:PutObjectAcl"
+                                    ],
+                                    "Effect": "Allow",
+                                    "Resource": [
+                                        "arn:aws:s3:::mapbox/apps/ec2mnt/*"
+                                    ]
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "AccessKey": {
+            "Type": "AWS::IAM::AccessKey",
+            "Properties": {
+                "UserName": {
+                    "Ref": "User"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "AwsAccessKeyId": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    "AWS_ACCESS_KEY_ID=",
+                    {
+                        "Ref": "AccessKey"
+                    }
+                ]
+            }
+        },
+        "AwsSecretAccessKey": {
+            "Value": {
+                "Fn::Join": [
+                    "",
+                    "AWS_SECRET_ACCESS_KEY=",
+                    {
+                        "Fn::GetAtt": [
+                            "AccessKey",
+                            "SecretAccessKey"
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}

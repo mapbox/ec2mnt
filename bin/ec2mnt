@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-set -e -u -o pipefail
+set -e -u
 
 # install lvm2
-apt-get update -qq --allow-unauthenticated
+apt-get update -qq --allow-unauthenticated || true
 apt-get install -qq -y --force-yes --allow-unauthenticated lvm2
 
 # Setup drives

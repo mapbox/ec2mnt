@@ -6,9 +6,6 @@ set -e -u
 apt-get update -qq --allow-unauthenticated || true
 apt-get install -qq -y --force-yes --allow-unauthenticated lvm2
 
-# Setup drives
-mkdir -p /mnt/data
-
 # Setup disks
 drivecount=0
 for z in b c d e f g h i j k; do
@@ -29,5 +26,8 @@ mkfs.ext4 /dev/mapper/volgroup-lvoldata
 # reserve less of the disk for sys ops
 # http://askubuntu.com/questions/79981/df-h-shows-incorrect-free-space
 tune2fs -m 0.05 /dev/mapper/volgroup-lvoldata
+
+# Mount volume
+mkdir -p /mnt/data
 mount /dev/mapper/volgroup-lvoldata /mnt/data
 

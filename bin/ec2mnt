@@ -31,3 +31,10 @@ tune2fs -m 0.05 /dev/mapper/volgroup-lvoldata
 mkdir -p /mnt/data
 mount /dev/mapper/volgroup-lvoldata /mnt/data
 
+# move /tmp to /mnt/data
+mkdir -p /mnt/data/tmp
+chmod a+rwx /mnt/data/tmp
+mv /tmp/* /mnt/data/tmp
+rm -rf /tmp
+ln -s /mnt/data/tmp /tmp
+

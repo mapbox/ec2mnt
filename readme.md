@@ -5,6 +5,6 @@ Combine + mount EC2 instance store volumes into a single volume at `/mnt/data`. 
 ### Run from S3
 
 ```
-$ curl https://s3.amazonaws.com/mapbox/apps/ec2mnt/v1.0.0 | bash
+$ curl https://s3.amazonaws.com/mapbox/apps/ec2mnt/v1.1.0 | bash
 ```
 

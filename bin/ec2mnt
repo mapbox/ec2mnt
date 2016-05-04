@@ -3,8 +3,13 @@
 set -e -u
 
 # install lvm2
-apt-get update -qq --allow-unauthenticated || true
-apt-get install -qq -y --force-yes --allow-unauthenticated lvm2
+if (which yum); then
+    yum update -y || true
+    yum install -y lvm2
+else
+    apt-get update -qq --allow-unauthenticated || true
+    apt-get install -qq -y --force-yes --allow-unauthenticated lvm2
+fi
 
 # Setup disks
 drivecount=0
@@ -12,7 +17,7 @@ for z in b c d e f g h i j k; do
     drive="/dev/xvd${z}"
     if [ -e $drive ]; then
         umount $drive &> /dev/null || echo "unmount $drive"
-        pvcreate $drive
+        pvcreate -f -y $drive
         if [ "$drivecount" == "0" ]; then
             vgcreate volgroup $drive
         else
@@ -37,4 +42,3 @@ chmod a+rwx /mnt/data/tmp
 mv /tmp/* /mnt/data/tmp
 rm -rf /tmp
 ln -s /mnt/data/tmp /tmp
-

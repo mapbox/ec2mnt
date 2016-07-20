@@ -1,0 +1,54 @@
+{
+    "AWSTemplateFormatVersion": "2010-09-09",
+    "Description": "Travis user for building watchbot",
+    "Resources": {
+        "User": {
+            "Type": "AWS::IAM::User",
+            "Properties": {
+                "Path": "/service/",
+                "Policies": [
+                    {
+                        "PolicyName": "watchbot-build",
+                        "PolicyDocument": {
+                            "Statement": [
+                                {
+                                    "Resource": [
+                                        "arn:aws-cn:s3:::mapbox-cn-north-1/apps/ec2mnt/*"
+                                    ],
+                                    "Action": [
+                                        "s3:PutObject",
+                                        "s3:PutObjectACL"
+                                    ],
+                                    "Effect": "Allow"
+                                }
+                            ]
+                        }
+                    }
+                ]
+            }
+        },
+        "AccessKey": {
+            "Type": "AWS::IAM::AccessKey",
+            "Properties": {
+                "UserName": {
+                    "Ref": "User"
+                }
+            }
+        }
+    },
+    "Outputs": {
+        "AccessKeyId": {
+            "Value": {
+                "Ref": "AccessKey"
+            }
+        },
+        "SecretAccessKey": {
+            "Value": {
+                "Fn::GetAtt": [
+                    "AccessKey",
+                    "SecretAccessKey"
+                ]
+            }
+        }
+    }
+}

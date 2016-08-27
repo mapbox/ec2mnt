@@ -32,6 +32,9 @@ mkfs.ext4 /dev/mapper/volgroup-lvoldata
 # http://askubuntu.com/questions/79981/df-h-shows-incorrect-free-space
 tune2fs -m 0.05 /dev/mapper/volgroup-lvoldata
 
+# Set the NOMOUNT env var to bypass mounting the volume
+if [ -n "${NOMOUNT:-}" ]; then exit 0; fi
+
 # Mount volume
 mkdir -p /mnt/data
 mount /dev/mapper/volgroup-lvoldata /mnt/data

@@ -1,17 +1,17 @@
 {
-  "name": "@mapbox/ec2mnt",
-  "version": "1.3.0",
-  "description": "Mount ec2 volumes into a single volume at /mnt/data",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/mapbox/ec2mnt.git"
-  },
   "bin": {
     "ec2mnt": "bin/ec2mnt"
-  },
-  "license": "BSD",
+  }, 
+  "name": "@mapbox/ec2mnt", 
+  "license": "BSD-2-Clause", 
   "bugs": {
     "url": "https://github.com/mapbox/ec2mnt/issues"
-  },
-  "homepage": "https://github.com/mapbox/ec2mnt"
+  }, 
+  "repository": {
+    "url": "https://github.com/mapbox/ec2mnt.git", 
+    "type": "git"
+  }, 
+  "version": "1.3.0", 
+  "homepage": "https://github.com/mapbox/ec2mnt", 
+  "description": "Mount ec2 volumes into a single volume at /mnt/data"
 }
